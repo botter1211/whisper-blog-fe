@@ -1,0 +1,17 @@
+.ck.ck-editor {
+  background: inherit;
+  border-radius: 2;
+  width: 100%;
+}
+.ck.ck-editor__editable_inline {
+  color: black;
+}
+:root {
+  --ck-border-radius: 4px;
+
+  --ck-color-input-text: hsl(0, 0%, 98%);
+}
+
+iframe#webpack-dev-server-client-overlay {
+  display: none !important;
+}

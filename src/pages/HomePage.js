@@ -20,7 +20,7 @@ export default function HomePage() {
   return (
     <div>
       {/* <MainFeaturedPost /> */}
-      <SearchInput handleSubmit={handleSubmit} />
+      <SearchInput placeholder="Search by title" handleSubmit={handleSubmit} />
       <Grid container spacing={1} sx={{ mt: 1 }}>
         <Sidebar />
         <HomeBlog filterName={filterName} />

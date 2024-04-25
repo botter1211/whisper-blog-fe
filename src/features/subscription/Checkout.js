@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import PaymentPriceSelector from "./PaymentPriceSelector";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const Checkout = () => {
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
@@ -69,17 +69,17 @@ const Checkout = () => {
       switch (totalPrice) {
         case 5:
           redispatch(buySubscription30())
-            .then(() => navigate(`/user/${user._id}`))
+            .then(() => navigate(`/user/${user.slug}`))
             .then(() => navigate(0));
           break;
         case 25:
           redispatch(buySubscription180())
-            .then(() => navigate(`/user/${user._id}`))
+            .then(() => navigate(`/user/${user.slug}`))
             .then(() => navigate(0));
           break;
         case 50:
           redispatch(buySubscription365())
-            .then(() => navigate(`/user/${user._id}`))
+            .then(() => navigate(`/user/${user.slug}`))
             .then(() => navigate(0));
           break;
 
@@ -99,9 +99,19 @@ const Checkout = () => {
             <option value="USD">💵 USD</option>
             <option value="EUR">💶 Euro</option>
           </select> */}
-          <Typography>{selectedPrice}</Typography>
+          <Box p={3}>
+            <Typography>Only subscription can write blogs.</Typography>
+            <Typography>
+              We have 3 subscription packages for you to choose from
+            </Typography>
+          </Box>
           <PaymentPriceSelector onSelectPrice={handlePriceSelect} />
+          <Typography sx={{ py: 5, px: 4 }} variant="h6" fontWeight={600}>
+            You choose: {selectedPrice}$
+          </Typography>
+
           <PayPalButtons
+            forceReRender={[totalPrice]}
             style={{ layout: "vertical" }}
             createOrder={(data, actions) => onCreateOrder(data, actions)}
             onApprove={(data, actions) => onApproveOrder(data, actions)}

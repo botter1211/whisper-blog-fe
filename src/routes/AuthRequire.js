@@ -11,7 +11,7 @@ function AuthRequire({ children }) {
     return <LoadingScreen />;
   }
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/guest" state={{ from: location }} replace />;
   }
   return children;
 }

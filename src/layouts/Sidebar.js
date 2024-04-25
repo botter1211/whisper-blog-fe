@@ -8,21 +8,24 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import XIcon from "@mui/icons-material/X";
 import { Box } from "@mui/material";
+import { capitalCase } from "change-case";
 
 const _ = require("lodash");
 
 function Sidebar() {
   const categories = [
-    { title: "Technology", url: "#" },
-    { title: "Design", url: "#" },
-    { title: "Culture", url: "#" },
-    { title: "Business", url: "#" },
-    { title: "Politics", url: "#" },
-    { title: "Opinion", url: "#" },
-    { title: "Science", url: "#" },
-    { title: "Health", url: "#" },
-    { title: "Style", url: "#" },
-    { title: "Travel", url: "#" },
+    { title: "technology", url: "#" },
+    { title: "design", url: "#" },
+    { title: "culture", url: "#" },
+    { title: "art", url: "#" },
+    { title: "business", url: "#" },
+    { title: "politics", url: "#" },
+    { title: "opinion", url: "#" },
+    { title: "science", url: "#" },
+    { title: "health", url: "#" },
+    { title: "style", url: "#" },
+    { title: "travel", url: "#" },
+    { title: "games", url: "#" },
   ];
   const social = [
     { name: "GitHub", icon: GitHubIcon },
@@ -85,7 +88,7 @@ function Sidebar() {
             sx={{
               border: "1px solid",
               py: 1,
-              px: 3,
+              px: 2,
               m: 1,
               borderRadius: 4,
             }}
@@ -93,7 +96,7 @@ function Sidebar() {
             href={category.url}
             key={category.title}
           >
-            {category.title}
+            {capitalCase(category.title)}
           </Link>
         </Box>
       ))}
@@ -116,7 +119,12 @@ function Sidebar() {
           >
             <Stack direction="row" spacing={1} alignItems="center">
               <network.icon />
-              <span>{network.name}</span>
+              <Typography
+                variant="subtitle2"
+                sx={{ display: { xs: "none", md: "flex" } }}
+              >
+                {network.name}
+              </Typography>
             </Stack>
           </Link>
         ))}

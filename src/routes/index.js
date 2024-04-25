@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, redirect } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import HomePage from "../pages/HomePage";
 
@@ -16,11 +16,16 @@ import UserProfilePage from "../pages/UserProfilePage";
 import BlogDetailPage from "../pages/BlogDetailPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import SubscriptionPage from "../pages/SubscriptionPage";
-// import AuthRequire from "./AuthRequire";
+import GuestPage from "../pages/GuestPage";
+import useAuth from "../hooks/useAuth";
 
 function Router() {
+  const { user } = useAuth();
   return (
     <Routes>
+      <Route element={<Layout />}>
+        <Route path="/guest" element={<GuestPage />} />
+      </Route>
       <Route
         path="/"
         element={

@@ -12,6 +12,8 @@ const initialState = {
   currentPageBlogs: [],
   selectedBlog: null,
   reaction: false,
+  selectedBlogLikes: [],
+  blogLikes: [],
 };
 
 const slice = createSlice({
@@ -82,12 +84,21 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
       const { blogId, likeCount } = action.payload;
+      state.selectedBlog.likeCount = likeCount; // <--
       state.blogsById[blogId].likeCount = likeCount;
+      if (state.blogsById[blogId]) {
+        state.blogsById[blogId].likeCount = likeCount;
+      }
     },
     getReactionSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      state.reaction = action.payload.success;
+      state.selectedBlogLikes = action.payload;
+    },
+    getAllReactionSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.blogLikes = action.payload;
     },
 
     getSingleBlogSuccess(state, action) {
@@ -95,6 +106,7 @@ const slice = createSlice({
       state.error = null;
 
       state.selectedBlog = action.payload;
+      state.blogsById[action.payload._id] = action.payload;
     },
 
     deleteBlogSuccess(state, action) {
@@ -106,6 +118,19 @@ const slice = createSlice({
       state.currentPageBlogs = state.currentPageBlogs.filter(
         (blog) => blogId !== blog
       );
+    },
+
+    getGuestBlogsSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+
+      const { blogs, count } = action.payload;
+      blogs.forEach((blog) => {
+        state.blogsById[blog._id] = blog;
+        if (!state.currentPageBlogs.includes(blog._id))
+          state.currentPageBlogs.push(blog._id);
+      });
+      state.totalBlogs = count;
     },
   },
 });
@@ -167,7 +192,15 @@ export const getPublishedBlogs =
   };
 
 export const createBlog =
-  ({ title, content, coverImage, isAllowComment, isAllowReaction, status }) =>
+  ({
+    title,
+    content,
+    category,
+    coverImage,
+    isAllowComment,
+    isAllowReaction,
+    status,
+  }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
@@ -175,6 +208,7 @@ export const createBlog =
       const response = await apiService.post("/blogs", {
         title,
         content,
+        category,
         coverImage: imageUrl,
         isAllowComment,
         isAllowReaction,
@@ -193,6 +227,7 @@ export const updateBlog =
     blogId,
     title,
     content,
+    category,
     coverImage,
     isAllowComment,
     isAllowReaction,
@@ -205,6 +240,7 @@ export const updateBlog =
       const response = await apiService.put(`/blogs/${blogId}`, {
         title,
         content,
+        category,
         coverImage: imageUrl,
         isAllowComment,
         isAllowReaction,
@@ -245,7 +281,9 @@ export const getReaction =
     dispatch(slice.actions.startLoading());
     try {
       const response = await apiService.get(`/reactions`, {
-        blogId,
+        params: {
+          blogId: blogId,
+        },
       });
       dispatch(slice.actions.getReactionSuccess(response.data));
     } catch (error) {
@@ -253,6 +291,16 @@ export const getReaction =
       toast.error(error.message);
     }
   };
+export const getAllReactionOfUser = () => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
+  try {
+    const response = await apiService.get(`/reactions`);
+    dispatch(slice.actions.getAllReactionSuccess(response.data));
+  } catch (error) {
+    dispatch(slice.actions.hasError(error.message));
+    toast.error(error.message);
+  }
+};
 
 export const getSingleBlog = (slug) => async (dispatch) => {
   dispatch(slice.actions.startLoading());
@@ -276,6 +324,18 @@ export const deleteBlog = (blogId) => async (dispatch) => {
     const response = await apiService.delete(`/blogs/${blogId}`);
     dispatch(slice.actions.deleteBlogSuccess({ ...response.data, blogId }));
     toast.success("Blog Deleted");
+  } catch (error) {
+    dispatch(slice.actions.hasError(error.message));
+    toast.error(error.message);
+  }
+};
+
+export const getAllBlogsForGuest = () => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
+  try {
+    const response = await apiService.get(`/blogs`);
+    dispatch(slice.actions.getGuestBlogsSuccess(response.data));
+    console.log(response.data);
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
     toast.error(error.message);

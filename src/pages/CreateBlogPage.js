@@ -36,6 +36,7 @@ export default function CreateBlogPage() {
   const defaultValues = {
     title: "",
     content: "",
+    category: "",
     coverImage: null,
     status: null,
     isAllowComment: true,
@@ -126,6 +127,27 @@ export default function CreateBlogPage() {
                   }}
                 />
 
+                <FSelect name="category" label="Category">
+                  {[
+                    { type: "", name: "None" },
+                    { type: "technology", name: "Technology" },
+                    { type: "design", name: "Design" },
+                    { type: "culture", name: "Culture" },
+                    { type: "art", name: "Art" },
+                    { type: "business", name: "Business" },
+                    { type: "politics", name: "Politics" },
+                    { type: "opinion", name: "Opinion" },
+                    { type: "science", name: "Science" },
+                    { type: "health", name: "Health" },
+                    { type: "style", name: "Style" },
+                    { type: "travel", name: "Travel" },
+                    { type: "games", name: "Games" },
+                  ].map((option) => (
+                    <option key={option.type} value={option.type}>
+                      {option.name}
+                    </option>
+                  ))}
+                </FSelect>
                 <FSelect name="status" label="Blog Status">
                   {[
                     { code: "draft", label: "Draft" },

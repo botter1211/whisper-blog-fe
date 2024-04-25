@@ -90,7 +90,7 @@ function ProfileBlogCard({ blog }) {
                 color="text.primary"
                 component={RouterLink}
                 sx={{ fontWeight: 600 }}
-                to={`/user/${blog.author._id}`}
+                to={`/user/${blog.author.slug}`}
               >
                 {blog?.author?.name}
               </Link>

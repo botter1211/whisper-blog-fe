@@ -52,8 +52,16 @@ function UserProfilePage() {
         <LoadingScreen />
       ) : (
         <>
-          <Box display="flex" justifyContent="flex-end">
-            <SearchInput handleSubmit={handleSubmit} />
+          <Box
+            sx={{
+              display: { xs: "block", md: "flex" },
+              justifyContent: { md: "flex-end" },
+            }}
+          >
+            <SearchInput
+              placeholder="Search by title"
+              handleSubmit={handleSubmit}
+            />
           </Box>
           <Grid container spacing={3}>
             <Grid item xs={12} md={4}>

@@ -11,6 +11,7 @@ import Logo from "../components/Logo";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { Avatar, Box, Divider, Menu, MenuItem } from "@mui/material";
 import useAuth from "../hooks/useAuth";
+import blogSlice from "../features/blog/blogSlice";
 
 function Header({ mode, toggleColorMode }) {
   const { user, logout } = useAuth();
@@ -109,14 +110,16 @@ function Header({ mode, toggleColorMode }) {
       </Box>
       <Divider sx={{ borderStyle: "dashed" }} />
 
-      <MenuItem
-        onClick={handleMenuClose}
-        to={`/user/${user.slug}`}
-        component={RouterLink}
-        sx={{ mx: 1 }}
-      >
-        Profile
-      </MenuItem>
+      {user && (
+        <MenuItem
+          onClick={handleMenuClose}
+          to={`/user/${user.slug}`}
+          component={RouterLink}
+          sx={{ mx: 1 }}
+        >
+          Profile
+        </MenuItem>
+      )}
       <MenuItem
         onClick={handleMenuClose}
         to="/dashboard"

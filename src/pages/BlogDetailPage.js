@@ -27,6 +27,7 @@ import CommentList from "../features/comment/CommentList";
 import CommentForm from "../features/comment/CommentForm";
 import BlogReaction from "../features/blog/BlogReaction";
 import useAuth from "../hooks/useAuth";
+import ModalEditBlog from "../features/blog/ModalEditBlog";
 
 function BlogDetailPage() {
   const { user } = useAuth();
@@ -50,6 +51,10 @@ function BlogDetailPage() {
     });
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  if (!selectedBlog) {
+    return <LoadingScreen />;
+  }
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -78,14 +83,18 @@ function BlogDetailPage() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {/* <ModalPostUpdate post={post} /> */}
+      <Box display="flex" flexDirection="column" sx={{ p: 2, gap: 1 }}>
+        <ModalEditBlog blog={selectedBlog} />
 
-      <Button
-        onClick={() => dispatch(deleteBlog(selectedBlog._id))}
-        sx={{ width: "100px" }}
-      >
-        Delete
-      </Button>
+        <Button
+          onClick={() => dispatch(deleteBlog(selectedBlog._id))}
+          sx={{ width: "100px" }}
+          variant="outlined"
+          color="error"
+        >
+          Delete
+        </Button>
+      </Box>
     </Menu>
   );
   return (
@@ -103,88 +112,84 @@ function BlogDetailPage() {
         <meta name="twitter:content" content={selectedBlog?.content} />
       </Helmet>
       <Container>
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={12} margin="auto">
-              <Card sx={{ mb: 3 }}>
-                <CardHeader
-                  disableTypography
-                  avatar={
-                    <Avatar
-                      src={selectedBlog?.author.avatarUrl}
-                      alt={selectedBlog?.author.name}
-                    />
-                  }
-                  title={
-                    <Link
-                      variant="subtitle2"
-                      color="text.primary"
-                      component={RouterLink}
-                      sx={{ fontWeight: 600 }}
-                      to={`/user/${selectedBlog?.author._id}`}
-                    >
-                      {selectedBlog?.author.name}
-                    </Link>
-                  }
-                  subheader={
-                    <Typography
-                      variant="caption"
-                      sx={{ display: "block", color: "text.secondary" }}
-                    >
-                      Published on{" "}
-                      {selectedBlog ? fDate(selectedBlog?.createdAt) : ""}
-                    </Typography>
-                  }
-                  action={
-                    user._id === selectedBlog?.author._id && (
-                      <>
-                        <IconButton>
-                          <MoreVertIcon
-                            sx={{ fontSize: 30 }}
-                            onClick={handleProfileMenuOpen}
-                          />
-                        </IconButton>
-
-                        {renderMenu}
-                      </>
-                    )
-                  }
-                />
-
-                <Stack spacing={2} sx={{ p: 3 }}>
-                  {selectedBlog?.coverImage && (
-                    <Box
-                      sx={{
-                        borderRadius: 2,
-                        overflow: "hidden",
-
-                        "& img": { objectFit: "cover", width: 1, height: 1 },
-                      }}
-                    >
-                      <img src={selectedBlog?.coverImage} alt="selectedBlog" />
-                    </Box>
-                  )}
-                  <Typography variant="h3">{selectedBlog?.title}</Typography>
-                  {renderHTML(selectedBlog?.content)}
-                  {selectedBlog?.isAllowReaction === true && (
-                    <Box display="flex" alignItems="center">
-                      <BlogReaction blog={selectedBlog} />
-                      {/* {selectedBlog?.likeCount} */}
-                    </Box>
-                  )}
-                  {selectedBlog?.isAllowComment === true && (
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={12} margin="auto">
+            <Card sx={{ mb: 3 }}>
+              <CardHeader
+                disableTypography
+                avatar={
+                  <Avatar
+                    src={selectedBlog?.author.avatarUrl}
+                    alt={selectedBlog?.author.name}
+                  />
+                }
+                title={
+                  <Link
+                    variant="subtitle2"
+                    color="text.primary"
+                    component={RouterLink}
+                    sx={{ fontWeight: 600 }}
+                    to={`/user/${selectedBlog?.author.slug}`}
+                  >
+                    {selectedBlog?.author.name}
+                  </Link>
+                }
+                subheader={
+                  <Typography
+                    variant="caption"
+                    sx={{ display: "block", color: "text.secondary" }}
+                  >
+                    Published on{" "}
+                    {selectedBlog ? fDate(selectedBlog?.createdAt) : ""}
+                  </Typography>
+                }
+                action={
+                  user._id === selectedBlog?.author._id && (
                     <>
-                      <CommentList blogId={selectedBlog?._id} />
-                      <CommentForm blogId={selectedBlog?._id} />
+                      <IconButton>
+                        <MoreVertIcon
+                          sx={{ fontSize: 30 }}
+                          onClick={handleProfileMenuOpen}
+                        />
+                      </IconButton>
+
+                      {renderMenu}
                     </>
-                  )}
-                </Stack>
-              </Card>
-            </Grid>
+                  )
+                }
+              />
+
+              <Stack spacing={2} sx={{ p: 3 }}>
+                {selectedBlog?.coverImage && (
+                  <Box
+                    sx={{
+                      borderRadius: 2,
+                      overflow: "hidden",
+
+                      "& img": { objectFit: "cover", width: 1, height: 1 },
+                    }}
+                  >
+                    <img src={selectedBlog?.coverImage} alt="selectedBlog" />
+                  </Box>
+                )}
+                <Typography variant="h3">{selectedBlog?.title}</Typography>
+                {renderHTML(selectedBlog?.content)}
+                {selectedBlog?.isAllowReaction === true && (
+                  <Box display="flex" alignItems="center">
+                    <BlogReaction blog={selectedBlog} />
+                    {/* {selectedBlog?.likeCount} */}
+                  </Box>
+                )}
+                {selectedBlog?.isAllowComment === true && (
+                  <>
+                    <CommentList blogId={selectedBlog?._id} />
+                    <CommentForm blogId={selectedBlog?._id} />
+                  </>
+                )}
+              </Stack>
+            </Card>
           </Grid>
-        )}
+        </Grid>
       </Container>
     </>
   );

@@ -36,7 +36,10 @@ function FollowerList() {
       <Card sx={{ p: 3 }}>
         <Stack spacing={2}>
           <Stack direction={{ xs: "column", md: "row" }} alignItems="center">
-            <SearchInput handleSubmit={handleSubmit} />
+            <SearchInput
+              placeholder="Search by name"
+              handleSubmit={handleSubmit}
+            />
             <Box sx={{ flexGrow: 1 }} />
             <Typography
               variant="subtitle"

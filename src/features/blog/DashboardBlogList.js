@@ -26,7 +26,7 @@ function DashboardBlogList() {
   }, [filterName, user._id, page, dispatch]);
   return (
     <>
-      <SearchInput handleSubmit={handleSubmit} />
+      <SearchInput placeholder="Search by title" handleSubmit={handleSubmit} />
       {blogs.map((blog) => (
         <DashboardBlogCard key={blog._id} blog={blog} />
       ))}

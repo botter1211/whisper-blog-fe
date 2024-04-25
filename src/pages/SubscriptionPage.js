@@ -1,7 +1,8 @@
 import React from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Checkout from "../features/subscription/Checkout";
-import { Box, Card, Typography } from "@mui/material";
+import { Box, Card, Grid, Typography } from "@mui/material";
+import MasterCard from "../components/MasterCard";
 
 function SubscriptionPage() {
   const initialOptions = {
@@ -13,11 +14,18 @@ function SubscriptionPage() {
 
   return (
     <PayPalScriptProvider options={initialOptions}>
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Card sx={{ width: "400px", p: 2 }}>
-          <Checkout />
-        </Card>
-      </Box>
+      <Grid container spacing={1} sx={{ mt: 1 }}>
+        <Grid item md={5} xs={12}>
+          <MasterCard />
+        </Grid>
+        <Grid item md={7} xs={12}>
+          <Card sx={{ p: 2 }}>
+            <Box sx={{ m: "auto" }}>
+              <Checkout />
+            </Box>
+          </Card>
+        </Grid>
+      </Grid>
     </PayPalScriptProvider>
   );
 }

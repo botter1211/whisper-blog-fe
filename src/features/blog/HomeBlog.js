@@ -7,9 +7,12 @@ import { Box, Grid, Typography } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 import SearchInput from "../../components/SearchInput";
 import LoadingScreen from "../../components/LoadingScreen";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 function HomeBlog({ filterName }) {
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+
   const { user } = useAuth();
   const userId = user._id;
   const { currentPageBlogs, blogsById, totalBlogs, isLoading } = useSelector(
@@ -19,7 +22,17 @@ function HomeBlog({ filterName }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userId) dispatch(getHomeBlogs({ filterName, userId, page }));
+    if (filterName) {
+      dispatch(getHomeBlogs({ filterName, userId, page }));
+
+      navigate({
+        pathname: "/",
+        search: createSearchParams({ filterName }).toString(),
+      });
+    } else {
+      navigate("/");
+      dispatch(getHomeBlogs({ filterName, userId, page }));
+    }
   }, [filterName, userId, page, dispatch]);
   return (
     <>

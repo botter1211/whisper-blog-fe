@@ -1,7 +1,7 @@
 import React from "react";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Checkout from "../features/subscription/Checkout";
-import { Box, Card, Grid, Typography } from "@mui/material";
+import { Box, Card, Grid } from "@mui/material";
 import MasterCard from "../components/MasterCard";
 
 function SubscriptionPage() {

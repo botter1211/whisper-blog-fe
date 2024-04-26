@@ -49,7 +49,7 @@ export default function CreateBlogPage() {
   });
   const {
     handleSubmit,
-    reset,
+
     setValue,
     formState: { isSubmitting },
   } = methods;

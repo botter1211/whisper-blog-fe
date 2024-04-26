@@ -33,7 +33,7 @@ export default function GuestPage() {
       alert("You must log in to continue!!");
       navigate("/login");
     }, 20000);
-  }, []);
+  }, [navigate]);
 
   return (
     <div>

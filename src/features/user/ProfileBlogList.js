@@ -4,7 +4,6 @@ import { getPublishedBlogs } from "../blog/blogSlice";
 import ProfileBlogCard from "./ProfileBlogCard";
 import { LoadingButton } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
-import SearchInput from "../../components/SearchInput";
 
 function ProfileBlogList({ filterTitle, userId }) {
   const [page, setPage] = useState(1);

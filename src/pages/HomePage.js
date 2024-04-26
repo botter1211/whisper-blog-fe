@@ -15,7 +15,7 @@ import {
 } from "react-router-dom";
 
 export default function HomePage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const navigate = useNavigate();
 

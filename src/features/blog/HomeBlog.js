@@ -7,11 +7,10 @@ import { Box, Grid, Typography } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 
 import LoadingScreen from "../../components/LoadingScreen";
-import { useNavigate } from "react-router-dom";
 
 function HomeBlog({ filterTitle, category }) {
   const [page, setPage] = useState(1);
-  const navigate = useNavigate();
+
   console.log(category);
   const { user } = useAuth();
   const userId = user._id;

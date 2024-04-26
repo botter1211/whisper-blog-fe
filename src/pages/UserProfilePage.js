@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Tab, Box, Tabs, Grid } from "@mui/material";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import ShareIcon from "@mui/icons-material/Share";
+import { Container, Box, Grid } from "@mui/material";
 
 import ProfileBlogList from "../features/user/ProfileBlogList";
 

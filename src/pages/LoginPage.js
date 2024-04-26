@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { FCheckbox, FormProvider, FTextField } from "../components/form";
+import { FormProvider, FTextField } from "../components/form";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -54,7 +54,7 @@ function LoginPage() {
     if (isAuth && isAuth !== null) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
   const onSubmit = async (data) => {
     const from = location.state?.from?.pathname || "/";
     let { email, password } = data;

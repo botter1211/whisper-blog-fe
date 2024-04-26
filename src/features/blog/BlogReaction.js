@@ -14,18 +14,23 @@ function BlogReaction({ blog }) {
   const { user } = useAuth();
   const dispatch = useDispatch();
 
-  const { selectedBlogLikes } = useSelector((state) => state.blog);
+  const { blogLikesByBlogId } = useSelector((state) => state.blog);
 
   useEffect(() => {
     if (blog) {
       dispatch(getReaction({ blogId: blog._id }));
-      // dispatch(getAllReactionOfUser());
     }
   }, [blog]);
 
-  const didCurrentUserLike = selectedBlogLikes.some(
-    (like) => like.author === user._id
-  );
+  const blogId = blog._id;
+  const selectedBlogLikes = blogLikesByBlogId[blogId];
+  let didCurrentUserLike;
+
+  if (selectedBlogLikes) {
+    didCurrentUserLike = selectedBlogLikes.some(
+      (like) => like.author === user._id
+    );
+  }
 
   const handleClick = (type) => {
     dispatch(sendBlogReaction({ blogId: blog._id, type }));

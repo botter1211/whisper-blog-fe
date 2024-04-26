@@ -22,18 +22,16 @@ function HomeBlog({ filterTitle }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (filterTitle) {
+    if (userId) {
       dispatch(getHomeBlogs({ filterTitle, userId, page }));
 
-      navigate({
-        pathname: "/",
-        search: createSearchParams({ filterTitle }).toString(),
-      });
-    } else {
-      navigate("/");
-      dispatch(getHomeBlogs({ filterTitle, userId, page }));
+      // navigate({
+      //   pathname: "/",
+      //   search: createSearchParams({ filterTitle }).toString(),
+      // });
     }
   }, [filterTitle, userId, page, dispatch]);
+
   return (
     <>
       {isLoading ? (

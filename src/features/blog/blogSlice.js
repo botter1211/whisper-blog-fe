@@ -12,7 +12,8 @@ const initialState = {
   currentPageBlogs: [],
   selectedBlog: null,
   reaction: false,
-  selectedBlogLikes: [],
+  // selectedBlogLikes: [],
+  blogLikesByBlogId: {},
   blogLikes: [],
 };
 
@@ -84,23 +85,26 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
       const { blogId, likeCount } = action.payload;
-      state.selectedBlog.likeCount = likeCount; // <--
+      if (state.selectedBlog) {
+        state.selectedBlog.likeCount = likeCount; // <--
+      }
       state.blogsById[blogId].likeCount = likeCount;
-      // if (state.blogsById[blogId]) {
-      //   state.blogsById[blogId].likeCount = likeCount;
-      // }
     },
     getReactionSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      state.selectedBlogLikes = action.payload;
+      // state.selectedBlogLikes = action.payload;
+
+      const blogId = action.payload.blogId;
+      if (blogId) {
+        state.blogLikesByBlogId[blogId] = action.payload.data;
+      }
     },
     getAllReactionSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
       state.blogLikes = action.payload;
     },
-
     getSingleBlogSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
@@ -285,7 +289,12 @@ export const getReaction =
           blogId: blogId,
         },
       });
-      dispatch(slice.actions.getReactionSuccess(response.data));
+      dispatch(
+        slice.actions.getReactionSuccess({
+          blogId: blogId,
+          data: response.data,
+        })
+      );
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast.error(error.message);

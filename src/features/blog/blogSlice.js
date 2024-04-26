@@ -142,12 +142,13 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const getBlogsOfUser =
-  ({ filterTitle, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
+  ({ filterTitle, category, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
       if (filterTitle) params.title = filterTitle;
+      if (category) params.category = category;
       const response = await apiService.get(`/blogs/user/${userId}`, {
         params,
       });
@@ -160,12 +161,13 @@ export const getBlogsOfUser =
   };
 
 export const getHomeBlogs =
-  ({ filterTitle, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
+  ({ filterTitle, category, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
       if (filterTitle) params.title = filterTitle;
+      if (category) params.category = category;
       const response = await apiService.get(`/blogs/home/user/${userId}`, {
         params,
       });
@@ -178,12 +180,13 @@ export const getHomeBlogs =
   };
 
 export const getPublishedBlogs =
-  ({ filterTitle, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
+  ({ filterTitle, category, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
       if (filterTitle) params.title = filterTitle;
+      if (category) params.category = category;
       const response = await apiService.get(`/blogs/published/user/${userId}`, {
         params,
       });

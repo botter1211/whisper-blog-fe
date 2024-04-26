@@ -9,10 +9,10 @@ import SearchInput from "../../components/SearchInput";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
-function HomeBlog({ filterTitle }) {
+function HomeBlog({ filterTitle, category }) {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
-
+  console.log(category);
   const { user } = useAuth();
   const userId = user._id;
   const { currentPageBlogs, blogsById, totalBlogs, isLoading } = useSelector(
@@ -23,14 +23,14 @@ function HomeBlog({ filterTitle }) {
 
   useEffect(() => {
     if (userId) {
-      dispatch(getHomeBlogs({ filterTitle, userId, page }));
+      dispatch(getHomeBlogs({ category, filterTitle, userId, page }));
 
       // navigate({
       //   pathname: "/",
       //   search: createSearchParams({ filterTitle }).toString(),
       // });
     }
-  }, [filterTitle, userId, page, dispatch]);
+  }, [filterTitle, category, userId, page, dispatch]);
 
   return (
     <>

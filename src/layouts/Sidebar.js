@@ -7,12 +7,12 @@ import Link from "@mui/material/Link";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import XIcon from "@mui/icons-material/X";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { capitalCase } from "change-case";
 
 const _ = require("lodash");
 
-function Sidebar() {
+function Sidebar({ handleClick }) {
   const categories = [
     { title: "technology", url: "#" },
     { title: "design", url: "#" },
@@ -83,7 +83,7 @@ function Sidebar() {
           sx={{ flexWrap: "wrap" }}
           key={category.title}
         >
-          <Link
+          <Button
             underline="hover"
             sx={{
               border: "1px solid",
@@ -93,11 +93,12 @@ function Sidebar() {
               borderRadius: 4,
             }}
             variant="body1"
-            href={category.url}
+            value={category.title}
+            onClick={(e) => handleClick(e.target.value)}
             key={category.title}
           >
-            {capitalCase(category.title)}
-          </Link>
+            {category.title}
+          </Button>
         </Box>
       ))}
       <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>

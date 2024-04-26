@@ -7,7 +7,7 @@ import MainFeaturedPost from "../layouts/MainFeaturedPost";
 import FeaturedPost from "../layouts/FeaturedPost";
 import Main from "../layouts/Main";
 import BlogList from "../features/blog/BlogList";
-
+import RefreshIcon from "@mui/icons-material/Refresh";
 import HomeBlog from "../features/blog/HomeBlog";
 import SearchInput from "../components/SearchInput";
 import { useState } from "react";
@@ -42,7 +42,6 @@ export default function HomePage() {
     });
   };
 
-  // handle click on category
   const handleClick = (categoryValue) => {
     let currentSearchParams = {};
 
@@ -63,15 +62,28 @@ export default function HomePage() {
     });
   };
 
+  const handleReset = () => {
+    navigate({
+      pathname: "/",
+    });
+  };
   return (
     <div>
       {/* <MainFeaturedPost /> */}
-      <SearchInput placeholder="Search by title" handleSubmit={handleSubmit} />
+      <Grid display="flex" sx={{ gap: 1 }}>
+        <SearchInput
+          placeholder="Search by title"
+          handleSubmit={handleSubmit}
+        />
+        <Button variant="outlined" onClick={handleReset}>
+          <RefreshIcon />
+        </Button>
+      </Grid>
       <Grid container spacing={1} sx={{ mt: 1 }}>
-        <Sidebar />
+        <Sidebar handleClick={handleClick} />
         <HomeBlog
           filterTitle={searchParams.get("filterTitle")}
-          cateogory={searchParams.get("category")}
+          category={searchParams.get("category")}
         />
 
         {/* <Main /> */}

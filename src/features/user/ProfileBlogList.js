@@ -6,7 +6,7 @@ import { LoadingButton } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
 import SearchInput from "../../components/SearchInput";
 
-function ProfileBlogList({ filterName, userId }) {
+function ProfileBlogList({ filterTitle, userId }) {
   const [page, setPage] = useState(1);
   console.log(userId);
   const { currentPageBlogs, blogsById, totalBlogs, isLoading } = useSelector(
@@ -16,8 +16,8 @@ function ProfileBlogList({ filterName, userId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userId) dispatch(getPublishedBlogs({ filterName, userId, page }));
-  }, [filterName, userId, page, dispatch]);
+    if (userId) dispatch(getPublishedBlogs({ filterTitle, userId, page }));
+  }, [filterTitle, userId, page, dispatch]);
   return (
     <>
       {blogs.map((blog) => (

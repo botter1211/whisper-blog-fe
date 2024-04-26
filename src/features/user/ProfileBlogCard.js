@@ -132,7 +132,7 @@ function ProfileBlogCard({ blog }) {
                 <img src={blog.coverImage} alt="blog" />
               </Box>
             )}
-            <Typography>{blog.title}</Typography>
+            <Typography variant="h6">{blog.title}</Typography>
             {renderHTML(blog.content)}
             {blog?.isAllowReaction === true && (
               <Box display="flex" alignItems="center">

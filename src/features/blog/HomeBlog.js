@@ -5,9 +5,9 @@ import BlogCard from "./BlogCard";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, Typography } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
-import SearchInput from "../../components/SearchInput";
+
 import LoadingScreen from "../../components/LoadingScreen";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function HomeBlog({ filterTitle, category }) {
   const [page, setPage] = useState(1);
@@ -24,11 +24,6 @@ function HomeBlog({ filterTitle, category }) {
   useEffect(() => {
     if (userId) {
       dispatch(getHomeBlogs({ category, filterTitle, userId, page }));
-
-      // navigate({
-      //   pathname: "/",
-      //   search: createSearchParams({ filterTitle }).toString(),
-      // });
     }
   }, [filterTitle, category, userId, page, dispatch]);
 

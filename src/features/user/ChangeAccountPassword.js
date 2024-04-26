@@ -1,6 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import {
-  Box,
   Grid,
   Card,
   Stack,
@@ -17,7 +16,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, FTextField } from "../../components/form";
-import { fData } from "../../utils/numberFormat";
+
 import { useDispatch, useSelector } from "react-redux";
 import { changePassword } from "./userSlice";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +45,6 @@ function ChangeAccountPassword() {
     defaultValues,
   });
   const {
-    setValue,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;

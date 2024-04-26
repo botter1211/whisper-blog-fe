@@ -34,10 +34,7 @@ function BlogDetailPage() {
   const params = useParams();
   const { slug } = params;
   const dispatch = useDispatch();
-  const { selectedBlog, isLoading } = useSelector(
-    (state) => state.blog,
-    shallowEqual
-  );
+  const { selectedBlog } = useSelector((state) => state.blog, shallowEqual);
   console.log(slug);
   useEffect(() => {
     if (slug) {

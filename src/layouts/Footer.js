@@ -21,9 +21,6 @@ function Footer() {
   return (
     <Box component="footer" sx={{ bgcolor: "background.paper", py: 6 }}>
       <Container maxWidth="lg">
-        {/* <Typography variant="h6" align="center" gutterBottom>
-          Huy Nguyen
-        </Typography>
         <Typography
           variant="subtitle1"
           align="center"
@@ -31,7 +28,7 @@ function Footer() {
           component="p"
         >
           Design by Huy Nguyen
-        </Typography> */}
+        </Typography>
         <Copyright />
       </Container>
     </Box>

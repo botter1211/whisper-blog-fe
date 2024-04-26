@@ -32,7 +32,7 @@ export default function GuestPage() {
     setTimeout(() => {
       alert("You must log in to continue!!");
       navigate("/login");
-    }, 10000);
+    }, 20000);
   }, []);
 
   return (

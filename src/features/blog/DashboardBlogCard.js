@@ -11,20 +11,14 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { fDate } from "../../utils/formatTime";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import CommentList from "../comment/CommentList";
-
 import Menu from "@mui/material/Menu";
 import { useDispatch } from "react-redux";
 
-// import editPost from "./postSlice";
-// import PostUpdate from "./PostUpdate";
-// import ModalPostUpdate from "./ModalPostUpdate";
-import BlogReaction from "../blog/BlogReaction";
 import { deleteBlog } from "../blog/blogSlice";
 import ModalEditBlog from "./ModalEditBlog";
 
@@ -33,7 +27,7 @@ function DashboardBlogCard({ blog }) {
     React.createElement("div", {
       dangerouslySetInnerHTML: { __html: rawHTML },
     });
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
 

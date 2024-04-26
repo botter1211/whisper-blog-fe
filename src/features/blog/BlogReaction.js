@@ -1,11 +1,7 @@
 import { IconButton, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllReactionOfUser,
-  getReaction,
-  sendBlogReaction,
-} from "./blogSlice";
+import { getReaction, sendBlogReaction } from "./blogSlice";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useAuth from "../../hooks/useAuth";

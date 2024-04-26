@@ -1,16 +1,13 @@
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
+
 import Button from "@mui/material/Button";
-import Layout from "../layouts/Layout";
+
 import Sidebar from "../layouts/Sidebar";
-import MainFeaturedPost from "../layouts/MainFeaturedPost";
-import FeaturedPost from "../layouts/FeaturedPost";
-import Main from "../layouts/Main";
-import BlogList from "../features/blog/BlogList";
+
 import RefreshIcon from "@mui/icons-material/Refresh";
 import HomeBlog from "../features/blog/HomeBlog";
 import SearchInput from "../components/SearchInput";
-import { useState } from "react";
+
 import {
   useNavigate,
   useSearchParams,

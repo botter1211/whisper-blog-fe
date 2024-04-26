@@ -1,17 +1,13 @@
 import * as React from "react";
 import Toolbar from "@mui/material/Toolbar";
-import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import ToggleColorMode from "./ToggleColorMode";
-import Category from "./Category";
 import Logo from "../components/Logo";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { Avatar, Box, Divider, Menu, MenuItem } from "@mui/material";
 import useAuth from "../hooks/useAuth";
-import blogSlice from "../features/blog/blogSlice";
 
 function Header({ mode, toggleColorMode }) {
   const { user, logout } = useAuth();

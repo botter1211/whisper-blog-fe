@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-// import Switch from "@mui/material/Switch";
+
 import Header from "./Header";
 
 import Footer from "./Footer";
-// import ToggleColorMode from "./ToggleColorMode";
+
 import { Box, Container, useScrollTrigger } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import AlertMsg from "../components/AlertMsg";

@@ -2,23 +2,6 @@ import React from "react";
 import "../notfound.css";
 import { Link as RouterLink } from "react-router-dom";
 function NotFoundPage() {
-  var pageX = document.body.clientWidth;
-
-  var pageY = document.body.clientHeight;
-  var mouseY = 0;
-  var mouseX = 0;
-
-  onmousemove = (event) => {
-    mouseY = event.pageY;
-    let yAxis = ((pageY / 2 - mouseY) / pageY) * 300;
-    mouseX = event.pageX / -pageX;
-    let xAxis = -mouseX * 100 - 100;
-
-    // ".box__ghost-eyes".css({
-    //   transform: "translate(" + xAxis + "%,-" + yAxis + "%)",
-    // });
-  };
-
   return (
     <div className="notfound_body">
       <div className="box">

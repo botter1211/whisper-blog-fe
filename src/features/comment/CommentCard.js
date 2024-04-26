@@ -108,20 +108,7 @@ function CommentCard({ comment }) {
         </Stack>
 
         {renderMenu}
-        {/* <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            onClick={() =>
-              setEditcomment((prev) => (prev === "off" ? "on" : "off"))
-            }
-          >
-            Edit
-          </Button>
-          <Button
-            onClick={() => dispatch(deleteComment(comment._id, comment.blogId))}
-          >
-            Delete
-          </Button>
-        </Box> */}
+
         {editcomment === "on" && (
           <EditComment comment={comment} setEditcomment={setEditcomment} />
         )}

@@ -8,7 +8,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import XIcon from "@mui/icons-material/X";
 import { Box, Button } from "@mui/material";
-import { capitalCase } from "change-case";
 
 const _ = require("lodash");
 

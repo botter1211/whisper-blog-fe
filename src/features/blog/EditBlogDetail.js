@@ -48,7 +48,6 @@ export default function EditBlogDetail({ blog }) {
   });
   const {
     handleSubmit,
-    reset,
     setValue,
     formState: { isSubmitting },
   } = methods;

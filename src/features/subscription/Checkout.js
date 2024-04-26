@@ -14,8 +14,8 @@ import PaymentPriceSelector from "./PaymentPriceSelector";
 import { Box, Typography } from "@mui/material";
 
 const Checkout = () => {
-  const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
-  const [currency, setCurrency] = useState(options.currency);
+  const [{ isPending }] = usePayPalScriptReducer();
+
   const [selectedPrice, setSelectedPrice] = useState(5);
 
   const handlePriceSelect = (price) => {
@@ -26,16 +26,6 @@ const Checkout = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const redispatch = useDispatch();
-  const onCurrencyChange = ({ target: { value } }) => {
-    setCurrency(value);
-    dispatch({
-      type: "resetOptions",
-      value: {
-        ...options,
-        currency: value,
-      },
-    });
-  };
 
   const onCreateOrder = (data, actions) => {
     return actions.order.create({
@@ -95,10 +85,6 @@ const Checkout = () => {
         <p>LOADING...</p>
       ) : (
         <>
-          {/* <select value={currency} onChange={onCurrencyChange}>
-            <option value="USD">💵 USD</option>
-            <option value="EUR">💶 Euro</option>
-          </select> */}
           <Box p={3}>
             <Typography>Only subscription can write blogs.</Typography>
             <Typography>

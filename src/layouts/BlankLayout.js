@@ -1,12 +1,9 @@
 import React, { useState, useMemo } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-// import Switch from "@mui/material/Switch";
 
 import Toolbar from "@mui/material/Toolbar";
 import { Outlet } from "react-router-dom";
-
-// import Header from "./Header";
 
 import ToggleColorMode from "./ToggleColorMode";
 import Logo from "../components/Logo";
@@ -36,10 +33,6 @@ const BlankLayout = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Toolbar sx={{ justifyContent: "flex-end", mr: "20px" }}>
-        {/* <Switch
-          checked={mode === "dark"}
-          onChange={() => setMode(mode === "light" ? "dark" : "light")}
-        /> */}
         <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
       </Toolbar>
       <Stack minHeight="90vh" justifyContent="center" alignItems="center">

@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Button } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeFollow, createFollow } from "./followSlice";

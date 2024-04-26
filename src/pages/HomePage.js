@@ -42,6 +42,7 @@ export default function HomePage() {
     });
   };
 
+  // handle click on category
   const handleClick = (categoryValue) => {
     let currentSearchParams = {};
 

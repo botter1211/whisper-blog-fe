@@ -14,7 +14,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import SearchInput from "../components/SearchInput";
 
 function UserProfilePage() {
-  const [filterName, setFilterName] = useState("");
+  const [filterTitle, setFilterTitle] = useState("");
 
   const params = useParams();
   const { slug } = params;
@@ -26,7 +26,7 @@ function UserProfilePage() {
     }
   }, [slug, dispatch]);
   const handleSubmit = (searchQuery) => {
-    setFilterName(searchQuery);
+    setFilterTitle(searchQuery);
   };
   const { selectedUser, isLoading } = useSelector(
     (state) => state.user,
@@ -70,7 +70,7 @@ function UserProfilePage() {
             </Grid>
             <Grid item xs={12} md={8}>
               <ProfileBlogList
-                filterName={filterName}
+                filterTitle={filterTitle}
                 userId={selectedUser?._id}
               />
             </Grid>

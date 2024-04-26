@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import SearchInput from "../../components/SearchInput";
 
 function DashboardBlogList() {
-  const [filterName, setFilterName] = useState("");
+  const [filterTitle, setFilterTitle] = useState("");
   const [page, setPage] = useState(1);
   const { user } = useAuth();
 
@@ -19,11 +19,11 @@ function DashboardBlogList() {
   const dispatch = useDispatch();
 
   const handleSubmit = (searchQuery) => {
-    setFilterName(searchQuery);
+    setFilterTitle(searchQuery);
   };
   useEffect(() => {
-    dispatch(getBlogsOfUser({ userId: user._id, filterName, page }));
-  }, [filterName, user._id, page, dispatch]);
+    dispatch(getBlogsOfUser({ userId: user._id, filterTitle, page }));
+  }, [filterTitle, user._id, page, dispatch]);
   return (
     <>
       <SearchInput placeholder="Search by title" handleSubmit={handleSubmit} />

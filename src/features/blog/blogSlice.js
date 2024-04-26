@@ -86,9 +86,9 @@ const slice = createSlice({
       const { blogId, likeCount } = action.payload;
       state.selectedBlog.likeCount = likeCount; // <--
       state.blogsById[blogId].likeCount = likeCount;
-      if (state.blogsById[blogId]) {
-        state.blogsById[blogId].likeCount = likeCount;
-      }
+      // if (state.blogsById[blogId]) {
+      //   state.blogsById[blogId].likeCount = likeCount;
+      // }
     },
     getReactionSuccess(state, action) {
       state.isLoading = false;
@@ -138,12 +138,12 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const getBlogsOfUser =
-  ({ filterName, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
+  ({ filterTitle, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
-      if (filterName) params.title = filterName;
+      if (filterTitle) params.title = filterTitle;
       const response = await apiService.get(`/blogs/user/${userId}`, {
         params,
       });
@@ -156,12 +156,12 @@ export const getBlogsOfUser =
   };
 
 export const getHomeBlogs =
-  ({ filterName, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
+  ({ filterTitle, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
-      if (filterName) params.title = filterName;
+      if (filterTitle) params.title = filterTitle;
       const response = await apiService.get(`/blogs/home/user/${userId}`, {
         params,
       });
@@ -174,12 +174,12 @@ export const getHomeBlogs =
   };
 
 export const getPublishedBlogs =
-  ({ filterName, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
+  ({ filterTitle, userId, page = 1, limit = BLOGS_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
-      if (filterName) params.title = filterName;
+      if (filterTitle) params.title = filterTitle;
       const response = await apiService.get(`/blogs/published/user/${userId}`, {
         params,
       });

@@ -13,9 +13,9 @@ import SearchInput from "../components/SearchInput";
 import { useState } from "react";
 
 export default function HomePage() {
-  const [filterName, setFilterName] = useState("");
+  const [filterTitle, setFilterTitle] = useState("");
   const handleSubmit = (searchQuery) => {
-    setFilterName(searchQuery);
+    setFilterTitle(searchQuery);
   };
   return (
     <div>
@@ -23,7 +23,7 @@ export default function HomePage() {
       <SearchInput placeholder="Search by title" handleSubmit={handleSubmit} />
       <Grid container spacing={1} sx={{ mt: 1 }}>
         <Sidebar />
-        <HomeBlog filterName={filterName} />
+        <HomeBlog filterTitle={filterTitle} />
 
         {/* <Main /> */}
         {/* <FeaturedPost /> */}

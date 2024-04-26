@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FCheckbox, FormProvider, FTextField } from "../components/form";
 import { useForm } from "react-hook-form";
@@ -34,6 +34,7 @@ const defaultValues = {
 
 function LoginPage() {
   const auth = useAuth();
+
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
     defaultValues,
@@ -48,6 +49,12 @@ function LoginPage() {
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
 
+  useEffect(() => {
+    const isAuth = window.localStorage.getItem("accessToken");
+    if (isAuth && isAuth !== null) {
+      navigate("/");
+    }
+  }, []);
   const onSubmit = async (data) => {
     const from = location.state?.from?.pathname || "/";
     let { email, password } = data;

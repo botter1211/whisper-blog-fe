@@ -9,7 +9,7 @@ import SearchInput from "../../components/SearchInput";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
-function HomeBlog({ filterName }) {
+function HomeBlog({ filterTitle }) {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
@@ -22,18 +22,18 @@ function HomeBlog({ filterName }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (filterName) {
-      dispatch(getHomeBlogs({ filterName, userId, page }));
+    if (filterTitle) {
+      dispatch(getHomeBlogs({ filterTitle, userId, page }));
 
       navigate({
         pathname: "/",
-        search: createSearchParams({ filterName }).toString(),
+        search: createSearchParams({ filterTitle }).toString(),
       });
     } else {
       navigate("/");
-      dispatch(getHomeBlogs({ filterName, userId, page }));
+      dispatch(getHomeBlogs({ filterTitle, userId, page }));
     }
-  }, [filterName, userId, page, dispatch]);
+  }, [filterTitle, userId, page, dispatch]);
   return (
     <>
       {isLoading ? (

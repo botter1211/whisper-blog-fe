@@ -19,6 +19,7 @@ function BlogReaction({ blog }) {
   useEffect(() => {
     if (blog) {
       dispatch(getReaction({ blogId: blog._id }));
+      // dispatch(getAllReactionOfUser());
     }
   }, [blog]);
 

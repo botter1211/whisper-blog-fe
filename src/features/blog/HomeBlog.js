@@ -11,7 +11,6 @@ import LoadingScreen from "../../components/LoadingScreen";
 function HomeBlog({ filterTitle, category }) {
   const [page, setPage] = useState(1);
 
-  console.log(category);
   const { user } = useAuth();
   const userId = user._id;
   const { currentPageBlogs, blogsById, totalBlogs, isLoading } = useSelector(

@@ -129,7 +129,7 @@ export default function CreateBlogPage() {
 
                 <FSelect name="category" label="Category">
                   {[
-                    { type: "", name: "None" },
+                    { type: "none", name: "None" },
                     { type: "technology", name: "Technology" },
                     { type: "design", name: "Design" },
                     { type: "culture", name: "Culture" },

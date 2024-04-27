@@ -36,6 +36,7 @@ export default function EditBlogDetail({ blog }) {
   const defaultValues = {
     title: blog.title || "",
     content: blog?.content || "",
+    category: blog.category ? blog.category : "none",
     coverImage: blog?.coverImage || null,
     status: blog?.status || null,
     isAllowComment: blog?.isAllowComment || true,
@@ -129,7 +130,27 @@ export default function EditBlogDetail({ blog }) {
                     editor = "";
                   }}
                 />
-
+                <FSelect name="category" label="Category">
+                  {[
+                    { type: "none", name: "None" },
+                    { type: "technology", name: "Technology" },
+                    { type: "design", name: "Design" },
+                    { type: "culture", name: "Culture" },
+                    { type: "art", name: "Art" },
+                    { type: "business", name: "Business" },
+                    { type: "politics", name: "Politics" },
+                    { type: "opinion", name: "Opinion" },
+                    { type: "science", name: "Science" },
+                    { type: "health", name: "Health" },
+                    { type: "style", name: "Style" },
+                    { type: "travel", name: "Travel" },
+                    { type: "games", name: "Games" },
+                  ].map((option) => (
+                    <option key={option.type} value={option.type}>
+                      {option.name}
+                    </option>
+                  ))}
+                </FSelect>
                 <FSelect
                   defaultValues={defaultValues.status}
                   name="status"

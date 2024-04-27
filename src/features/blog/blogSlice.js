@@ -215,7 +215,7 @@ export const createBlog =
       const response = await apiService.post("/blogs", {
         title,
         content,
-        category,
+        category: category !== "none" ? category : "",
         coverImage: imageUrl,
         isAllowComment,
         isAllowReaction,
@@ -247,7 +247,7 @@ export const updateBlog =
       const response = await apiService.put(`/blogs/${blogId}`, {
         title,
         content,
-        category,
+        category: category !== "none" ? category : "",
         coverImage: imageUrl,
         isAllowComment,
         isAllowReaction,

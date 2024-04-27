@@ -4,7 +4,6 @@ import apiService from "../../app/apiService";
 import { BLOGS_PER_PAGE } from "../../app/config";
 import { cloudinaryUpload } from "../../utils/cloudinary";
 import { getCurrentUserProfile } from "../user/userSlice";
-import axios from "axios";
 
 const initialState = {
   isLoading: false,
@@ -318,9 +317,7 @@ export const getAllReactionOfUser = () => async (dispatch) => {
 export const getSingleBlog = (slug) => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
-    const response = await axios.get(
-      `https://whisper-blog-be.onrender.com/api/blogs/${slug}`
-    );
+    const response = await apiService.get(`/blogs/${slug}`);
     dispatch(slice.actions.getSingleBlogSuccess(response.data));
     console.log(response.data);
   } catch (error) {

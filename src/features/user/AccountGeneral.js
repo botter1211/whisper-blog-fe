@@ -1,7 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Box, Grid, Card, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import useAuth from "../../hooks/useAuth";
+import { fDate } from "../../utils/formatTime";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -10,6 +11,7 @@ import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
 import { fData } from "../../utils/numberFormat";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "./userSlice";
+import { getSubscription } from "../subscription/subscriptionSlice";
 
 const UpdateUserSchema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -18,7 +20,12 @@ const UpdateUserSchema = yup.object().shape({
 function AccountGeneral() {
   const { user } = useAuth();
   const isLoading = useSelector((state) => state.user.isLoading);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSubscription(user._id));
+  }, [user._id, dispatch]);
+  const { subsUser } = useSelector((state) => state.subscription);
+  console.log(subsUser);
   const defaultValues = {
     name: user?.name || "",
     email: user?.email || "",
@@ -26,7 +33,6 @@ function AccountGeneral() {
     avatarUrl: user?.avatarUrl || "",
     aboutMe: user?.aboutMe || "",
   };
-
   const methods = useForm({
     resolver: yupResolver(UpdateUserSchema),
     defaultValues,
@@ -36,8 +42,6 @@ function AccountGeneral() {
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-
-  const dispatch = useDispatch();
 
   const handleDrop = useCallback(
     (acceptedFiles) => {
@@ -54,6 +58,9 @@ function AccountGeneral() {
     },
     [setValue]
   );
+  if (!subsUser) {
+    return;
+  }
 
   const onSubmit = (data) => {
     dispatch(updateUserProfile({ userId: user._id, ...data }));
@@ -112,6 +119,11 @@ function AccountGeneral() {
               />
               <FTextField name="aboutMe" multiline rows={4} label="About Me" />
 
+              {subsUser[0]?.expiredDate && (
+                <Typography width="100%" variant="h7" fontWeight={600}>
+                  Subscription expired date: {fDate(subsUser[0]?.expiredDate)}
+                </Typography>
+              )}
               <LoadingButton
                 type="submit"
                 variant="contained"

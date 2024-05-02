@@ -6,7 +6,7 @@ const initialState = {
   isLoading: false,
   error: null,
   updatedProfile: null,
-  selectedUser: null,
+  subsUser: null,
 };
 
 const slice = createSlice({
@@ -33,6 +33,11 @@ const slice = createSlice({
     buySubscription365Success(state, action) {
       state.isLoading = false;
       state.error = null;
+    },
+    getSubscriptionSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.subsUser = action.payload;
     },
   },
 });
@@ -70,5 +75,14 @@ export const buySubscription365 = () => async (dispatch) => {
   } catch (error) {
     dispatch(slice.actions.hasError(error));
     toast.error(error.message);
+  }
+};
+export const getSubscription = (userId) => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
+  try {
+    const response = await apiService.get(`/subscriptions/${userId}`);
+    dispatch(slice.actions.getSubscriptionSuccess(response.data));
+  } catch (error) {
+    dispatch(slice.actions.hasError(error));
   }
 };

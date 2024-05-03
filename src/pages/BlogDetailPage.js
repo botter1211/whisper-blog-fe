@@ -35,7 +35,7 @@ function BlogDetailPage() {
   const { slug } = params;
   const dispatch = useDispatch();
   const { selectedBlog } = useSelector((state) => state.blog, shallowEqual);
-  console.log(slug);
+
   useEffect(() => {
     if (slug) {
       dispatch(getSingleBlog(slug));

@@ -7,7 +7,7 @@ import { Box, Typography } from "@mui/material";
 
 function ProfileBlogList({ filterTitle, userId }) {
   const [page, setPage] = useState(1);
-  console.log(userId);
+
   const { currentPageBlogs, blogsById, totalBlogs, isLoading } = useSelector(
     (state) => state.blog
   );

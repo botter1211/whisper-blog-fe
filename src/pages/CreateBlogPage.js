@@ -103,19 +103,11 @@ export default function CreateBlogPage() {
                   data=""
                   name="content"
                   onInit={(editor) => {
-                    // You can store the "editor" and use when it is needed.
                     console.log("Editor is ready to use!", editor);
                   }}
                   onChange={(value, editor) =>
                     setValue("content", editor.getData())
                   }
-                  //   onChange={(event, editor) => {
-                  //     const data = editor.getData();
-                  //     this.defaultValues({
-                  //       content: data,
-                  //     });
-                  //     console.log({ event, editor, data });
-                  //   }}
                   onBlur={(event, editor) => {
                     console.log("Blur.", editor);
                   }}

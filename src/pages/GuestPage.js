@@ -37,7 +37,6 @@ export default function GuestPage() {
 
   return (
     <div>
-      {/* <MainFeaturedPost /> */}
       <SearchInput placeholder="Search by title" handleSubmit={handleSubmit} />
       <Grid container spacing={1} sx={{ mt: 1 }}>
         <Sidebar />
@@ -65,10 +64,6 @@ export default function GuestPage() {
             </Box>
           </Grid>
         )}
-
-        {/* <Main /> */}
-        {/* <FeaturedPost /> */}
-        {/* <BlogList /> */}
       </Grid>
     </div>
   );

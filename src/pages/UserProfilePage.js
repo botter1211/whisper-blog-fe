@@ -43,7 +43,6 @@ function UserProfilePage() {
     ...selectedUserFollowStatus,
   };
 
-  console.log(selectedUser);
   return (
     <Container>
       {isLoading ? (

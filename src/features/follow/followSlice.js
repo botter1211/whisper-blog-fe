@@ -68,7 +68,6 @@ const slice = createSlice({
           follow: follow,
         };
       }
-      console.log(follow);
     },
 
     removeFollowSuccess(state, action) {
@@ -83,7 +82,6 @@ const slice = createSlice({
           follow: null,
         };
       }
-      //   state.usersById[targetUserId].follow = null;
     },
   },
 });

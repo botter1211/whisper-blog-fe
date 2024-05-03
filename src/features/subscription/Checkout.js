@@ -22,7 +22,7 @@ const Checkout = () => {
     setSelectedPrice(price);
   };
   const totalPrice = parseInt(selectedPrice);
-  console.log(totalPrice);
+
   const { user } = useAuth();
   const navigate = useNavigate();
   const redispatch = useDispatch();
@@ -42,20 +42,6 @@ const Checkout = () => {
 
   const onApproveOrder = (data, actions) => {
     return actions.order.capture().then(() => {
-      // if (totalPrice === 5) {
-      //   redispatch(buySubscription30())
-      //     .then(() => navigate(`/user/${user._id}`))
-      //     .then(() => navigate(0));
-      // }
-      // if (totalPrice === 25) {
-      //   redispatch(buySubscription180())
-      //     .then(() => navigate(`/user/${user._id}`))
-      //     .then(() => navigate(0));
-      // } else if (totalPrice === 50) {
-      //   redispatch(buySubscription365())
-      //     .then(() => navigate(`/user/${user._id}`))
-      //     .then(() => navigate(0));
-      // }
       switch (totalPrice) {
         case 5:
           redispatch(buySubscription30())

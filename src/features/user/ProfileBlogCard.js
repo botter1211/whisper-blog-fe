@@ -137,7 +137,6 @@ function ProfileBlogCard({ blog }) {
             {blog?.isAllowReaction === true && (
               <Box display="flex" alignItems="center">
                 <BlogReaction blog={blog} />
-                {/* {blog.likeCount} */}
               </Box>
             )}
             {blog?.isAllowComment === true && (

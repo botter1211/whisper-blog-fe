@@ -12,6 +12,11 @@
   --ck-color-input-text: hsl(0, 0%, 98%);
 }
 
+@media screen and (max-width: 800px) {
+  .ck.ck-editor {
+    width: 100%;
+  }
+}
 iframe#webpack-dev-server-client-overlay {
   display: none !important;
 }

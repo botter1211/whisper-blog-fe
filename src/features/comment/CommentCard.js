@@ -15,8 +15,10 @@ import { useDispatch } from "react-redux";
 import { deleteComment } from "./commentSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditComment from "./EditComment";
+import useAuth from "../../hooks/useAuth";
 
 function CommentCard({ comment }) {
+  const { user } = useAuth();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [editcomment, setEditcomment] = React.useState("off");
@@ -99,15 +101,19 @@ function CommentCard({ comment }) {
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
             {comment.content}
           </Typography>
-          <IconButton>
-            <MoreVertIcon
-              sx={{ fontSize: 30 }}
-              onClick={handleProfileMenuOpen}
-            />
-          </IconButton>
-        </Stack>
 
-        {renderMenu}
+          {user._id === comment.author._id && (
+            <>
+              <IconButton>
+                <MoreVertIcon
+                  sx={{ fontSize: 30 }}
+                  onClick={handleProfileMenuOpen}
+                />
+              </IconButton>
+              {renderMenu}
+            </>
+          )}
+        </Stack>
 
         {editcomment === "on" && (
           <EditComment comment={comment} setEditcomment={setEditcomment} />
